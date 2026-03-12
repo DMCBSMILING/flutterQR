@@ -12,23 +12,19 @@ jobs:
     name: Static Code Analysis
     runs-on: ubuntu-latest
     steps:
-      # 1. Full history needed for accurate analysis
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Set up Flutter SDK
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          channel: stable          # ← fixed here
 
-      # 3. Install Flutter dependencies
       - name: Install Flutter Dependencies
         run: flutter pub get
 
-      # 4. Run SonarQube Cloud scan
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
